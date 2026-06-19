@@ -1,0 +1,401 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+    --primary: 36 95% 54%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 95%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 36 95% 54%;
+    --radius: 0.5rem;
+    --fleet-green: 142 71% 50%;
+    --alert-red: 0 84% 55%;
+    --highway-silver: 220 5% 55%;
+    --freight-yellow: 36 95% 54%;
+    --industrial-black: 0 0% 10%;
+  }
+
+  .light {
+    --background: 40 10% 97%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --primary: 36 95% 54%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 11%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 40 8% 94%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 220 5% 64%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 6% 88%;
+    --input: 40 6% 88%;
+    --ring: 36 95% 54%;
+    --fleet-green: 142 71% 45%;
+    --alert-red: 0 84% 60%;
+    --highway-silver: 220 5% 64%;
+    --freight-yellow: 36 95% 54%;
+    --industrial-black: 0 0% 11%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Exo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Exo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ============================================
+   FREIGHT FLOW ANIMATION SYSTEM
+   ============================================ */
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  /* --- Truck Drive: icon slides left to right --- */
+  .animate-truck-drive {
+    animation: truckDrive 4s ease-in-out infinite;
+  }
+
+  /* --- Highway Lines: dashed road markings scroll --- */
+  .animate-highway-lines {
+    animation: highwayLines 1.5s linear infinite;
+  }
+
+  /* --- Convoy: items stagger horizontally --- */
+  .animate-convoy {
+    animation: convoy 3s ease-in-out infinite;
+  }
+
+  /* --- Odometer: numbers roll up --- */
+  .animate-odometer {
+    animation: odometer 2s cubic-bezier(0.33, 0, 0.67, 1) forwards;
+  }
+
+  /* --- Fuel Gauge: bar fills left to right --- */
+  .animate-fuel-gauge {
+    animation: fuelGauge 2s ease-out forwards;
+  }
+
+  /* --- Cargo Load: boxes stack upward --- */
+  .animate-cargo-load {
+    animation: cargoLoad 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* --- Route Draw: SVG path draws --- */
+  .animate-route-draw {
+    animation: routeDraw 2s ease-in-out forwards;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+
+  /* --- Dispatch Pop: notification-style pop in --- */
+  .animate-dispatch-pop {
+    animation: dispatchPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* --- GPS Ping: location beacon pulse --- */
+  .animate-gps-ping {
+    animation: gpsPing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  /* --- Wheel Spin: subtle rotation --- */
+  .animate-wheel-spin {
+    animation: wheelSpin 2s linear infinite;
+  }
+
+  /* --- Freight Bounce: cargo settling bounce --- */
+  .animate-freight-bounce {
+    animation: freightBounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* --- Road Shimmer: heat haze effect --- */
+  .animate-road-shimmer {
+    animation: roadShimmer 3s ease-in-out infinite;
+  }
+
+  /* --- Signal Flash: CB radio style --- */
+  .animate-signal-flash {
+    animation: signalFlash 1.5s ease-in-out infinite;
+  }
+
+  /* --- Dock Slide: loading dock door slide --- */
+  .animate-dock-slide {
+    animation: dockSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  /* --- Fleet Stagger: items appear like convoy --- */
+  .animate-fleet-stagger {
+    animation: fleetStagger 0.5s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* --- Tachometer: gauge needle sweep --- */
+  .animate-tachometer {
+    animation: tachometer 1.5s cubic-bezier(0.33, 0, 0.67, 1) forwards;
+    transform-origin: bottom center;
+  }
+
+  /* --- Radar Sweep: rotating radar line --- */
+  .animate-radar-sweep {
+    animation: radarSweep 3s linear infinite;
+    transform-origin: center;
+  }
+
+  /* --- DOT Bounce: DOT compliance check bounce --- */
+  .animate-dot-check {
+    animation: dotCheck 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* --- Scroll Indicator --- */
+  .animate-scroll-hint {
+    animation: scrollHint 2s ease-in-out infinite;
+  }
+
+  /* --- Floating --- */
+  .animate-float {
+    animation: freightFloat 6s ease-in-out infinite;
+  }
+
+  /* --- Glow Pulse --- */
+  .animate-glow-pulse {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  /* --- Slide In From Left --- */
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+  }
+
+  /* --- Slide In From Right --- */
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+
+  /* --- Scale In --- */
+  .animate-scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  /* --- Typewriter --- */
+  .animate-typewriter {
+    animation: typewriter 3s steps(40) forwards;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid hsl(36, 95%, 54%);
+  }
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+/* Truck driving across */
+@keyframes truckDrive {
+  0% { transform: translateX(-100%); }
+  45% { transform: translateX(0%); }
+  55% { transform: translateX(0%); }
+  100% { transform: translateX(calc(100% + 100px)); }
+}
+
+/* Highway dashed lines scrolling */
+@keyframes highwayLines {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+/* Convoy stagger movement */
+@keyframes convoy {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+/* Odometer roll */
+@keyframes odometer {
+  0% { transform: translateY(100%); opacity: 0; }
+  60% { transform: translateY(-5%); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Fuel gauge fill */
+@keyframes fuelGauge {
+  0% { width: 0%; }
+  100% { width: var(--gauge-width, 75%); }
+}
+
+/* Cargo stacking */
+@keyframes cargoLoad {
+  0% { transform: translateY(30px) scale(0.9); opacity: 0; }
+  60% { transform: translateY(-5px) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* SVG route drawing */
+@keyframes routeDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Dispatch notification pop */
+@keyframes dispatchPop {
+  0% { transform: scale(0.3) translateY(20px); opacity: 0; }
+  50% { transform: scale(1.05) translateY(-3px); opacity: 1; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* GPS location ping */
+@keyframes gpsPing {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(2.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+/* Wheel rotation */
+@keyframes wheelSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Cargo bounce settle */
+@keyframes freightBounce {
+  0% { transform: translateY(-40px); opacity: 0; }
+  50% { transform: translateY(8px); opacity: 1; }
+  70% { transform: translateY(-4px); }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Road heat shimmer */
+@keyframes roadShimmer {
+  0%, 100% { opacity: 0.3; transform: scaleX(1); }
+  50% { opacity: 0.6; transform: scaleX(1.02); }
+}
+
+/* CB radio signal */
+@keyframes signalFlash {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Loading dock slide */
+@keyframes dockSlide {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Fleet stagger appearance */
+@keyframes fleetStagger {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Tachometer needle sweep */
+@keyframes tachometer {
+  0% { transform: rotate(-90deg); }
+  100% { transform: rotate(var(--tacho-deg, 45deg)); }
+}
+
+/* Radar sweep */
+@keyframes radarSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* DOT check bounce */
+@keyframes dotCheck {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Scroll hint bounce */
+@keyframes scrollHint {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* Floating */
+@keyframes freightFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* Glow pulse */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 5px hsla(36, 95%, 54%, 0.2); }
+  50% { box-shadow: 0 0 20px hsla(36, 95%, 54%, 0.4), 0 0 40px hsla(36, 95%, 54%, 0.1); }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  0% { transform: translateX(-40px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  0% { transform: translateX(40px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Scale in */
+@keyframes scaleIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Typewriter */
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ============================================
+   HIGHWAY LINE BACKGROUND PATTERN
+   ============================================ */
+.highway-lines {
+  background-image: repeating-linear-gradient(
+    90deg,
+    hsl(36, 95%, 54%) 0px,
+    hsl(36, 95%, 54%) 12px,
+    transparent 12px,
+    transparent 24px
+  );
+  background-size: 40px 2px;
+  background-repeat: repeat-x;
+}
+
+.highway-lines-vertical {
+  background-image: repeating-linear-gradient(
+    0deg,
+    hsl(36, 95%, 54%) 0px,
+    hsl(36, 95%, 54%) 12px,
+    transparent 12px,
+    transparent 24px
+  );
+  background-size: 2px 40px;
+  background-repeat: repeat-y;
+}
